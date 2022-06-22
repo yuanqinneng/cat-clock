@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>canvasDemo</title>
+        <title>cat-clock</title>
         <style>
             * {
                 padding: 0;
@@ -29,10 +29,15 @@
         <canvas id="canvas" width="600" height="600"></canvas>
         <script type="module">
             import draw from './js/draw.js';
-            window.onload = function () {
+            window.onload = () => {
                 let dom = document.getElementById('canvas');
-                let context = new draw('canvas');
-                context.init();
+                dom.setAttribute('width', document.body.clientWidth);
+                dom.setAttribute('height', document.body.clientHeight);
+                
+                setTimeout(() => {
+                    let context = new draw('canvas');
+                    context.init();
+                }, 1000);
             };
         </script>
     </body>

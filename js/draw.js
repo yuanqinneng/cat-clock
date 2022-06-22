@@ -5,7 +5,7 @@ export default class draw {
         this.width = document.getElementById(this.id).getAttribute('width');
         this.height = document.getElementById(this.id).getAttribute('height');
         this.PI = Math.PI;
-        this.r = 200;
+        this.r = Math.min(this.width, this.height)/2 - 50;
     }
     init() {
         let bgImg = new Image();
@@ -20,7 +20,7 @@ export default class draw {
         ctx.save();
         ctx.clearRect(0, 0, this.width, this.height);
         ctx.translate(this.width / 2, this.height / 2);
-        ctx.drawImage(bgImg, -this.r * 0.7, -this.r * 0.8);
+        ctx.drawImage(bgImg, -this.r/2, -this.r/2, this.r, this.r);
         ctx.save();
 
         this.drawArc(ctx);
@@ -56,7 +56,7 @@ export default class draw {
                 ((2 * this.PI) / 12) * hour + ((2 * this.PI) / 12) * (min / 60) - this.PI / 2
             );
             ctx.moveTo(-30, 0);
-            ctx.lineTo(60, 0);
+            ctx.lineTo(this.r*0.3, 0);
             ctx.lineWidth = 10;
             ctx.stroke();
         });
@@ -66,7 +66,7 @@ export default class draw {
                 ((2 * this.PI) / 60) * min + ((2 * this.PI) / 60) * (sec / 60) - this.PI / 2
             );
             ctx.moveTo(-40, 0);
-            ctx.lineTo(80, 0);
+            ctx.lineTo(this.r*0.4, 0);
             ctx.lineWidth = 5;
             ctx.strokeStyle = 'blue';
             ctx.stroke();
@@ -75,7 +75,7 @@ export default class draw {
         this.process(ctx, () => {
             ctx.rotate(((2 * this.PI) / 60) * sec - this.PI / 2);
             ctx.moveTo(-60, 0);
-            ctx.lineTo(100, 0);
+            ctx.lineTo(this.r*0.6, 0);
             ctx.lineWidth = 1;
             ctx.strokeStyle = 'red';
             ctx.stroke();
